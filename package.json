@@ -1,0 +1,14 @@
+{
+  "name": "immofind",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd server && nodemon src/index.js",
+    "dev:local": "bash dev.sh",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "db:push": "cd server && npx prisma db push",
+    "db:seed": "cd server && node prisma/seed.js",
+    "install:all": "cd server && npm install && cd ../client && npm install"
+  }
+}

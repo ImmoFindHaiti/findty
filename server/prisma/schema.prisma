@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String     @id @default(uuid())
+  nom                 String
+  prenom              String
+  email               String     @unique
+  motDePasse          String
+  telephone           String?
+  role                String     @default("UTILISATEUR")
+  avatar              String?
+  notificationsEnabled Boolean  @default(false)
+  premium             Boolean    @default(false)
+  premiumExpiresAt    DateTime?
+  createdAt           DateTime   @default(now())
+  annonces            Annonce[]
+  messages            Message[]  @relation("Expediteur")
+  reponses            Message[]  @relation("Destinataire")
+  favoris             Favori[]
+}
+
+model Bien {
+  id           String    @id @default(uuid())
+  titre        String
+  description  String
+  type         String
+  prix         Float
+  surface      Float?
+  chambres     Int?
+  sallesBain   Int?
+  localisation String
+  ville        String
+  quartier     String?
+  latitude     Float?
+  longitude    Float?
+  disponible   Boolean   @default(true)
+  photos       Photo[]
+  annonce      Annonce?
+  createdAt    DateTime  @default(now())
+}
+
+model Annonce {
+  id              String     @id @default(uuid())
+  statut          String     @default("ACTIVE")
+  vues            Int        @default(0)
+  isLocked        Boolean    @default(false)
+  proprietaireId  String
+  proprietaire    User       @relation(fields: [proprietaireId], references: [id])
+  bienId          String     @unique
+  bien            Bien       @relation(fields: [bienId], references: [id])
+  messages        Message[]
+  createdAt       DateTime   @default(now())
+}
+
+model Message {
+  id             String   @id @default(uuid())
+  contenu        String
+  lu             Boolean  @default(false)
+  expediteurId   String
+  expediteur     User     @relation("Expediteur", fields: [expediteurId], references: [id])
+  destinataireId String
+  destinataire   User     @relation("Destinataire", fields: [destinataireId], references: [id])
+  annonceId      String
+  annonce        Annonce  @relation(fields: [annonceId], references: [id])
+  createdAt      DateTime @default(now())
+}
+
+model Photo {
+  id     String @id @default(uuid())
+  url    String
+  bienId String
+  bien   Bien   @relation(fields: [bienId], references: [id])
+}
+
+model Favori {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  annonceId String
+  createdAt DateTime @default(now())
+}
