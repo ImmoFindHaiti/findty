@@ -1,9 +1,9 @@
 {
   "build": {
-    "command": "npm run build"
+    "command": "node -e \"console.log('ImmoFind ready')\""
   },
   "deploy": {
-    "startCommand": "npm start",
+    "startCommand": "npx prisma generate && npm start",
     "healthcheckPath": "/api/health",
     "restartPolicyType": "ON_FAILURE"
   }
