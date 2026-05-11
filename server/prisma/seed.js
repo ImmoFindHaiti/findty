@@ -7,21 +7,21 @@ async function main() {
   const mdp = await bcrypt.hash('123456', 12);
 
   const admin = await prisma.user.upsert({
-    where: { email: 'admin@immofind.com' },
+    where: { email: 'admin@findty.com' },
     update: {},
-    create: { nom: 'Admin', prenom: 'Super', email: 'admin@immofind.com', motDePasse: mdp, telephone: '+50900000000', role: 'ADMIN', notificationsEnabled: true }
+    create: { nom: 'Admin', prenom: 'Super', email: 'admin@findty.com', motDePasse: mdp, telephone: '+50900000000', role: 'ADMIN', notificationsEnabled: true }
   });
 
   const proprio = await prisma.user.upsert({
-    where: { email: 'proprio@immofind.com' },
+    where: { email: 'proprio@findty.com' },
     update: {},
-    create: { nom: 'Dupont', prenom: 'Jean', email: 'proprio@immofind.com', motDePasse: mdp, telephone: '+50911111111', role: 'PROPRIETAIRE', premium: true, premiumExpiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), notificationsEnabled: true }
+    create: { nom: 'Dupont', prenom: 'Jean', email: 'proprio@findty.com', motDePasse: mdp, telephone: '+50911111111', role: 'PROPRIETAIRE', premium: true, premiumExpiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), notificationsEnabled: true }
   });
 
   const user = await prisma.user.upsert({
-    where: { email: 'user@immofind.com' },
+    where: { email: 'user@findty.com' },
     update: {},
-    create: { nom: 'Martin', prenom: 'Marie', email: 'user@immofind.com', motDePasse: mdp, telephone: '+50922222222', role: 'UTILISATEUR' }
+    create: { nom: 'Martin', prenom: 'Marie', email: 'user@findty.com', motDePasse: mdp, telephone: '+50922222222', role: 'UTILISATEUR' }
   });
 
   const bien1 = await prisma.bien.create({
