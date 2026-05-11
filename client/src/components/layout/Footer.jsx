@@ -20,9 +20,10 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold mb-3">Contact</h4>
           <ul className="space-y-2 text-gray-400 text-sm">
-            <li>contact@immofindhaiti.com</li>
-            <li>+509 1234 5678</li>
+            <li>immofindhaiti@gmail.com</li>
+            <li>+509 3763 1012</li>
             <li>Port-au-Prince, Haïti</li>
+            <li className="text-gray-500 text-xs mt-2">Ce site a été designé par Mac Lane</li>
           </ul>
         </div>
       </div>
