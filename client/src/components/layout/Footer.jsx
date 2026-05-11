@@ -5,7 +5,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2 mb-3">
             <img src="/favicon.png" alt="" className="w-8 h-8 rounded" />
-            <h3 className="text-xl font-bold text-green-400">ImmoFind Haiti</h3>
+            <h3 className="text-xl font-bold text-green-400">Findty</h3>
           </div>
           <p className="text-gray-400 text-sm">Trouvez votre maison idéale sans vous déplacer. Location et achat immobilier en Haïti.</p>
         </div>
@@ -28,7 +28,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500 text-sm px-4">
-        &copy; {new Date().getFullYear()} ImmoFind Haiti. Tous droits réservés.
+        &copy; {new Date().getFullYear()} Findty. Tous droits réservés.
       </div>
     </footer>
   );

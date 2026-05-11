@@ -57,7 +57,7 @@ app.use('/api/notifications', notificationRoutes);
 app.use('/api/admin', adminRoutes);
 
 app.get('/api/health', (req, res) => {
-  res.json({ success: true, message: 'ImmoFind API OK' });
+  res.json({ success: true, message: 'Findty API OK' });
 });
 
 const CLIENT_DIST = path.join(__dirname, '../../client/dist');
@@ -71,5 +71,5 @@ if (fs.existsSync(CLIENT_DIST)) {
 app.use(errorMiddleware);
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`ImmoFind lancé sur http://0.0.0.0:${PORT}`);
+  console.log(`Findty lancé sur http://0.0.0.0:${PORT}`);
 });

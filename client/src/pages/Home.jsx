@@ -14,7 +14,7 @@ export default function Home() {
         <div className="relative bg-black">
           <video className="w-full max-h-[70vh] object-cover" src="/intro.mp4" autoPlay muted controls={false} playsInline onEnded={() => setShowVideo(false)} />
           <button onClick={() => setShowVideo(false)} className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70"><X size={20} /></button>
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">ImmoFind Haiti — Cliquez pour passer</div>
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">Findty — Cliquez pour passer</div>
         </div>
       )}
 

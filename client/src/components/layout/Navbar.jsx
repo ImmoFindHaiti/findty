@@ -75,8 +75,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <Link to="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-              <img src="/favicon.png" alt="ImmoFind" className="w-8 h-8 rounded" />
-              <span className="text-xl font-bold text-green-600">ImmoFind</span>
+              <img src="/favicon.png" alt="Findty" className="w-8 h-8 rounded" />
+               <span className="text-xl font-bold text-green-600">Findty</span>
               <span className="text-xs text-gray-500 hidden sm:inline">Haiti</span>
             </Link>
 
