@@ -34,8 +34,11 @@ export default function Home() {
   return (
     <div>
       {showVideo && (
-        <div className="fixed inset-0 z-[60] bg-black flex items-center justify-center" onClick={() => setShowVideo(false)}>
+        <div className="fixed inset-0 z-[60] bg-black flex items-center justify-center">
           <video ref={videoRef} className="w-full h-full object-cover" src="/scene.mp4" autoPlay muted playsInline onEnded={() => setShowVideo(false)} />
+          <button onClick={() => setShowVideo(false)} className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/60 text-sm hover:text-white transition">
+            Passer
+          </button>
         </div>
       )}
 
