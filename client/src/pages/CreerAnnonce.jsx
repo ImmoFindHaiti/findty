@@ -15,14 +15,16 @@ export default function CreerAnnonce() {
     if (photos.length < 5) return toast.error('Ajoutez au moins 5 photos');
     setLoading(true);
     try {
-      const res = await api.post('/annonces', { ...form, prix: parseFloat(form.prix), surface: form.surface ? parseFloat(form.surface) : undefined, chambres: form.chambres ? parseInt(form.chambres) : undefined, sallesBain: form.sallesBain ? parseInt(form.sallesBain) : undefined, latitude: form.latitude ? parseFloat(form.latitude) : undefined, longitude: form.longitude ? parseFloat(form.longitude) : undefined });
+      const body = { ...form, prix: parseFloat(form.prix) || 0, surface: form.surface ? parseFloat(form.surface) : undefined, chambres: form.chambres ? parseInt(form.chambres) : undefined, sallesBain: form.sallesBain ? parseInt(form.sallesBain) : undefined, latitude: form.latitude ? parseFloat(form.latitude) : undefined, longitude: form.longitude ? parseFloat(form.longitude) : undefined };
+      if (!body.prix || body.prix <= 0) return toast.error('Le prix doit être un nombre valide');
+      const res = await api.post('/annonces', body);
       const fd = new FormData();
       fd.append('bienId', res.data.data.bienId || res.data.data.bien.id);
       photos.forEach(p => fd.append('photos', p));
       await api.post('/photos/upload', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
       toast.success('Annonce créée avec succès !');
       navigate('/mes-annonces');
-    } catch (err) { toast.error(err.response?.data?.message || 'Erreur'); }
+    } catch (err) { const msg = err.response?.data?.errors?.map(e => e.message).join(', ') || err.response?.data?.message || 'Erreur'; toast.error(msg); }
     finally { setLoading(false); }
   };
 

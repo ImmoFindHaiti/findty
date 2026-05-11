@@ -33,15 +33,15 @@ export const bienSchema = z.object({
   titre: z.string().min(3, 'Le titre doit contenir au moins 3 caractères'),
   description: z.string().min(10, 'La description doit contenir au moins 10 caractères'),
   type: z.enum(['LOCATION', 'VENTE']),
-  prix: z.number().positive('Le prix doit être positif'),
-  surface: z.number().positive('La surface doit être positive').optional(),
-  chambres: z.number().int().positive().optional(),
-  sallesBain: z.number().int().positive().optional(),
+  prix: z.coerce.number().positive('Le prix doit être positif'),
+  surface: z.coerce.number().positive('La surface doit être positive').optional(),
+  chambres: z.coerce.number().int().positive().optional(),
+  sallesBain: z.coerce.number().int().positive().optional(),
   localisation: z.string().min(3, 'La localisation est requise'),
   ville: z.string().min(2, 'La ville est requise'),
   quartier: z.string().optional(),
-  latitude: z.number().optional(),
-  longitude: z.number().optional()
+  latitude: z.coerce.number().optional(),
+  longitude: z.coerce.number().optional()
 });
 
 export const messageSchema = z.object({
