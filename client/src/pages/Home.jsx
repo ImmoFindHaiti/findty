@@ -2,11 +2,23 @@ import { Link } from 'react-router-dom';
 import { Search, HomeIcon, TrendingUp, Shield, Play, X } from 'lucide-react';
 import useStore from '@/store/useStore';
 import { useState } from 'react';
+import useInView from '@/hooks/useInView';
+
+function AnimatedCard({ children, delay }) {
+  const [ref, visible] = useInView();
+  return (
+    <div ref={ref} className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  );
+}
 
 export default function Home() {
   const { budget, setBudget } = useStore();
   const [searchVille, setSearchVille] = useState('');
   const [showVideo, setShowVideo] = useState(true);
+  const [sectionRef, sectionVisible] = useInView();
+  const [btnRef, btnVisible] = useInView();
 
   return (
     <div>
@@ -21,7 +33,7 @@ export default function Home() {
       <section className="relative bg-cover bg-center text-white py-24" style={{ backgroundImage: "url('/background.jpeg')" }}>
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative max-w-7xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Trouvez votre maison idéale</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in">Trouvez votre maison idéale</h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-8">Sans vous déplacer. En un clic.</p>
 
           <div className="max-w-2xl mx-auto bg-white rounded-xl p-4 shadow-2xl">
@@ -43,25 +55,33 @@ export default function Home() {
 
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Comment ça marche ?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-6">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><Search className="text-green-600" size={28} /></div>
-              <h3 className="text-xl font-semibold mb-2">1. Entrez votre budget</h3>
-              <p className="text-gray-600">Indiquez combien vous pouvez dépenser pour votre futur logement.</p>
-            </div>
-            <div className="text-center p-6">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><HomeIcon className="text-green-600" size={28} /></div>
-              <h3 className="text-xl font-semibold mb-2">2. Parcourez les biens</h3>
-              <p className="text-gray-600">Visualisez instantanément les biens dans votre budget grâce aux barres colorées.</p>
-            </div>
-            <div className="text-center p-6">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><TrendingUp className="text-green-600" size={28} /></div>
-              <h3 className="text-xl font-semibold mb-2">3. Contactez le propriétaire</h3>
-              <p className="text-gray-600">Envoyez un message directement depuis l'application sans vous déplacer.</p>
-            </div>
+          <div ref={sectionRef} className={`transition-all duration-700 ${sectionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h2 className="text-3xl font-bold text-center mb-12">Comment ça marche ?</h2>
           </div>
-          <div className="text-center mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <AnimatedCard delay={0}>
+              <div className="text-center p-6">
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><Search className="text-green-600" size={28} /></div>
+                <h3 className="text-xl font-semibold mb-2">1. Entrez votre budget</h3>
+                <p className="text-gray-600">Indiquez combien vous pouvez dépenser pour votre futur logement.</p>
+              </div>
+            </AnimatedCard>
+            <AnimatedCard delay={200}>
+              <div className="text-center p-6">
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><HomeIcon className="text-green-600" size={28} /></div>
+                <h3 className="text-xl font-semibold mb-2">2. Parcourez les biens</h3>
+                <p className="text-gray-600">Visualisez instantanément les biens dans votre budget grâce aux barres colorées.</p>
+              </div>
+            </AnimatedCard>
+            <AnimatedCard delay={400}>
+              <div className="text-center p-6">
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"><TrendingUp className="text-green-600" size={28} /></div>
+                <h3 className="text-xl font-semibold mb-2">3. Contactez le propriétaire</h3>
+                <p className="text-gray-600">Envoyez un message directement depuis l'application sans vous déplacer.</p>
+              </div>
+            </AnimatedCard>
+          </div>
+          <div ref={btnRef} className={`text-center mt-10 transition-all duration-700 ${btnVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <Link to="/biens" className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700">Visionner les biens</Link>
           </div>
         </div>
