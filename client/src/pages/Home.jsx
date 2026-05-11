@@ -18,10 +18,11 @@ export default function Home() {
         </div>
       )}
 
-      <section className="relative bg-gradient-to-br from-green-600 to-green-800 text-white py-24">
-        <div className="max-w-7xl mx-auto px-4 text-center">
+      <section className="relative bg-cover bg-center text-white py-24" style={{ backgroundImage: "url('/background.jpeg')" }}>
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Trouvez votre maison idéale</h1>
-          <p className="text-xl md:text-2xl text-green-100 mb-8">Sans vous déplacer. En un clic.</p>
+          <p className="text-xl md:text-2xl text-gray-200 mb-8">Sans vous déplacer. En un clic.</p>
 
           <div className="max-w-2xl mx-auto bg-white rounded-xl p-4 shadow-2xl">
             <div className="flex flex-col md:flex-row gap-3">
