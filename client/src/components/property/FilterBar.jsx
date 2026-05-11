@@ -24,7 +24,7 @@ export default function FilterBar({ filters, onChange }) {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Budget max (HTG)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Budget max ($)</label>
           <div className="flex items-center gap-2">
             <input
               type="range"

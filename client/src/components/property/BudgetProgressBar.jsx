@@ -23,7 +23,7 @@ export default function BudgetProgressBar({ prix, budget }) {
       <div className="flex justify-between items-center mb-1">
         <span className="text-xs font-medium" style={{ color: couleur }}>{label}</span>
         <span className="text-xs font-semibold text-gray-700">
-          {prix.toLocaleString()} HTG
+          {prix.toLocaleString()} $
         </span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2.5">

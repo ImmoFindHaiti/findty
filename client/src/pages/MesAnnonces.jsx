@@ -39,7 +39,7 @@ export default function MesAnnonces() {
                   <h3 className="font-semibold truncate">{a.bien.titre}</h3>
                   {a.isLocked && <Lock size={14} className="text-red-500 flex-shrink-0" />}
                 </div>
-                <p className="text-sm text-gray-500">{a.bien.ville} - {a.bien.prix.toLocaleString()} HTG</p>
+                <p className="text-sm text-gray-500">{a.bien.ville} - {a.bien.prix.toLocaleString()} $</p>
                 <div className="flex items-center gap-2 mt-1">
                   <span className={`px-2 py-0.5 rounded text-xs font-medium ${a.statut === 'ACTIVE' ? 'bg-green-100 text-green-700' : a.statut === 'INACTIVE' ? 'bg-gray-100 text-gray-700' : 'bg-blue-100 text-blue-700'}`}>{a.statut}</span>
                   {a.isLocked && <span className="text-xs text-red-500">Verrouillée</span>}

@@ -86,7 +86,7 @@ export default function BienDetail() {
         <div className="lg:col-span-1">
           <div className="bg-white rounded-xl shadow-md p-6 sticky top-24 space-y-4">
             <BudgetProgressBar prix={bien.prix} budget={budget} />
-            <div className="text-3xl font-bold text-green-600">{bien.prix.toLocaleString()} HTG{bien.type === 'LOCATION' ? '/mois' : ''}</div>
+            <div className="text-3xl font-bold text-green-600">{bien.prix.toLocaleString()} ${bien.type === 'LOCATION' ? '/mois' : ''}</div>
 
             {user && (
               <button onClick={toggleFav} className={`w-full py-2 rounded-lg border flex items-center justify-center gap-2 ${faved ? 'bg-red-50 border-red-200 text-red-600' : 'hover:bg-gray-50'}`}>

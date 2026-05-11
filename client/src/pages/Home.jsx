@@ -30,7 +30,7 @@ export default function Home() {
                 <input type="text" placeholder="Ville, quartier..." value={searchVille} onChange={e => setSearchVille(e.target.value)} className="w-full pl-10 pr-4 py-3 border rounded-lg text-gray-800" />
               </div>
               <div className="flex-1">
-                <input type="number" placeholder="Votre budget max (HTG)" value={budget || ''} onChange={e => setBudget(parseInt(e.target.value) || null)} className="w-full px-4 py-3 border rounded-lg text-gray-800" />
+                <input type="number" placeholder="Votre budget max ($)" value={budget || ''} onChange={e => setBudget(parseInt(e.target.value) || null)} className="w-full px-4 py-3 border rounded-lg text-gray-800" />
               </div>
               <Link to={`/biens?ville=${searchVille}&budgetMax=${budget || ''}`} className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 text-center whitespace-nowrap">
                 Rechercher

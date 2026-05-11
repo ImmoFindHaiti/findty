@@ -6,5 +6,5 @@ export function cn(...inputs) {
 }
 
 export function formatPrix(prix) {
-  return new Intl.NumberFormat('fr-HT', { style: 'currency', currency: 'HTG', maximumFractionDigits: 0 }).format(prix);
+  return '$' + prix.toLocaleString('en-US');
 }

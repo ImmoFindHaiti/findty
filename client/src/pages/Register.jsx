@@ -53,11 +53,11 @@ export default function Register() {
                 <li>✓ 1 mois gratuit offert</li>
                 <li>✓ Publiez vos annonces immobilières</li>
                 <li>✓ Recevez les messages des clients</li>
-                <li className="font-medium">💰 1 000 HTG/mois après le 1er mois</li>
+                <li className="font-medium">💰 10 $/mois après le 1er mois</li>
               </ul>
               <label className="flex items-start gap-2 text-sm text-amber-800">
                 <input type="checkbox" checked={acceptPremium} onChange={e => setAcceptPremium(e.target.checked)} className="mt-1" />
-                <span>J'accepte les conditions. Je passe en Premium (1 mois offert, puis 1 000 HTG/mois). Aucune transaction sur le site.</span>
+                <span>J'accepte les conditions. Je passe en Premium (1 mois offert, puis 10 $/mois). Aucune transaction sur le site.</span>
               </label>
             </div>
           )}

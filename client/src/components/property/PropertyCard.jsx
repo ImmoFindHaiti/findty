@@ -61,7 +61,7 @@ export default function PropertyCard({ bien, isFavorited = false, onToggleFav })
             {bien.chambres && <span className="flex items-center gap-1"><Home size={14} />{bien.chambres} ch.</span>}
           </div>
           <BudgetProgressBar prix={bien.prix} budget={budget} />
-          <div className="text-lg font-bold text-green-600">{bien.prix.toLocaleString()} HTG{bien.type === 'LOCATION' ? '/mois' : ''}</div>
+          <div className="text-lg font-bold text-green-600">{bien.prix.toLocaleString()} ${bien.type === 'LOCATION' ? '/mois' : ''}</div>
         </div>
       </div>
     </Link>

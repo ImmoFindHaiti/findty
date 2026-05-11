@@ -48,7 +48,7 @@ export default function AdminAnnonces() {
               <tr key={a.id} className={`border-t hover:bg-gray-50 ${a.isLocked ? 'bg-gray-100 text-gray-400' : ''}`}>
                 <td className="p-4">{a.bien.titre}</td>
                 <td className="p-4 text-sm">{a.proprietaire.prenom} {a.proprietaire.nom}{a.proprietaire.premium ? <Crown size={14} className="inline text-amber-500 ml-1" /> : ''}</td>
-                <td className="p-4">{a.bien.prix.toLocaleString()} HTG</td>
+                <td className="p-4">{a.bien.prix.toLocaleString()} $</td>
                 <td className="p-4"><span className={`px-2 py-1 rounded text-xs font-medium ${a.statut === 'ACTIVE' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'}`}>{a.statut}</span></td>
                 <td className="p-4">{a.isLocked ? <Lock size={18} className="text-red-500" /> : <Unlock size={18} className="text-green-500" />}</td>
                 <td className="p-4">{a.vues}</td>
