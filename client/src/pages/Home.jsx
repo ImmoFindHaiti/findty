@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Search, HomeIcon, TrendingUp, Shield, Play, X } from 'lucide-react';
 import useStore from '@/store/useStore';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useInView from '@/hooks/useInView';
 
 function AnimatedCard({ children, delay }) {
@@ -20,13 +20,21 @@ export default function Home() {
   const [sectionRef, sectionVisible] = useInView();
   const [btnRef, btnVisible] = useInView();
 
+  useEffect(() => {
+    if (showVideo) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [showVideo]);
+
   return (
     <div>
       {showVideo && (
-        <div className="relative bg-black">
-          <video className="w-full max-h-[70vh] object-cover" src="/intro.mp4" autoPlay muted controls={false} playsInline onEnded={() => setShowVideo(false)} />
-          <button onClick={() => setShowVideo(false)} className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full hover:bg-black/70"><X size={20} /></button>
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-sm">Findty — Cliquez pour passer</div>
+        <div className="fixed inset-0 z-[60] bg-black flex items-center justify-center">
+          <video className="w-full h-full object-cover" src="/scene.mp4" autoPlay muted playsInline onEnded={() => setShowVideo(false)} />
+          <button onClick={() => setShowVideo(false)} className="absolute top-6 right-6 bg-white/20 text-white p-3 rounded-full hover:bg-white/40 transition"><X size={24} /></button>
         </div>
       )}
 
