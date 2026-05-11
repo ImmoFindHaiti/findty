@@ -44,6 +44,30 @@ app.use('/api/favoris', favoriRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/admin', adminRoutes);
 
+app.get('/api/seed', async (req, res) => {
+  try {
+    const bcrypt = (await import('bcryptjs')).default;
+    const mdp = await bcrypt.hash('123456', 12);
+    const admin = await prisma.user.upsert({ where: { email: 'admin@immofind.com' }, update: {}, create: { nom: 'Admin', prenom: 'Super', email: 'admin@immofind.com', motDePasse: mdp, telephone: '+50900000000', role: 'ADMIN', notificationsEnabled: true } });
+    const proprio = await prisma.user.upsert({ where: { email: 'proprio@immofind.com' }, update: {}, create: { nom: 'Dupont', prenom: 'Jean', email: 'proprio@immofind.com', motDePasse: mdp, telephone: '+50911111111', role: 'PROPRIETAIRE', premium: true, premiumExpiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), notificationsEnabled: true } });
+    const user = await prisma.user.upsert({ where: { email: 'user@immofind.com' }, update: {}, create: { nom: 'Martin', prenom: 'Marie', email: 'user@immofind.com', motDePasse: mdp, telephone: '+50922222222', role: 'UTILISATEUR' } });
+    const b1 = await prisma.bien.create({ data: { titre: 'Villa moderne à Pétion-Ville', description: 'Superbe villa avec piscine et jardin tropical.', type: 'VENTE', prix: 250000, surface: 200, chambres: 3, sallesBain: 2, localisation: 'Pétion-Ville, Rue principal', ville: 'Pétion-Ville', quartier: 'Bourdon', latitude: 18.5094, longitude: -72.2856 } });
+    const b2 = await prisma.bien.create({ data: { titre: 'Appartement centre-ville', description: 'Bel appartement lumineux au cœur de Port-au-Prince.', type: 'LOCATION', prix: 15000, surface: 65, chambres: 2, sallesBain: 1, localisation: 'Port-au-Prince, Avenue John Brown', ville: 'Port-au-Prince', quartier: 'Bois-Verna', latitude: 18.5334, longitude: -72.3379 } });
+    const b3 = await prisma.bien.create({ data: { titre: 'Maison de campagne à Kenscoff', description: 'Maison traditionnelle avec grand terrain.', type: 'VENTE', prix: 180000, surface: 150, chambres: 4, sallesBain: 2, localisation: 'Kenscoff, Route de Kenscoff', ville: 'Kenscoff', quartier: 'Furcy', latitude: 18.4472, longitude: -72.2857 } });
+    const b4 = await prisma.bien.create({ data: { titre: 'Studio meublé Delmas', description: 'Studio meublé, idéal pour étudiant.', type: 'LOCATION', prix: 8000, surface: 30, chambres: 1, sallesBain: 1, localisation: 'Delmas, Rue Delmas', ville: 'Delmas', quartier: 'Delmas 31', latitude: 18.5445, longitude: -72.3103 } });
+    const b5 = await prisma.bien.create({ data: { titre: 'Penthouse de luxe', description: 'Penthouse avec terrasse panoramique, vue imprenable sur la mer.', type: 'VENTE', prix: 450000, surface: 300, chambres: 5, sallesBain: 3, localisation: 'Pétion-Ville, Morne Calvaire', ville: 'Pétion-Ville', quartier: 'Morne Calvaire', latitude: 18.5050, longitude: -72.2800 } });
+    await prisma.annonce.create({ data: { proprietaireId: proprio.id, bienId: b1.id } });
+    await prisma.annonce.create({ data: { proprietaireId: proprio.id, bienId: b2.id } });
+    await prisma.annonce.create({ data: { proprietaireId: proprio.id, bienId: b3.id } });
+    await prisma.annonce.create({ data: { proprietaireId: proprio.id, bienId: b4.id } });
+    await prisma.annonce.create({ data: { proprietaireId: proprio.id, bienId: b5.id } });
+    res.json({ success: true, message: 'Base de données initialisée avec succès !', users: { admin: admin.email, proprio: proprio.email, user: user.email } });
+  } catch (e) {
+    if (e.code === 'P2002') return res.json({ success: true, message: 'Déjà seedé' });
+    res.status(500).json({ success: false, message: e.message });
+  }
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'ImmoFind API OK' });
 });
