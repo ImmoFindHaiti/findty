@@ -60,6 +60,9 @@ export default function Home() {
               <p className="text-gray-600">Envoyez un message directement depuis l'application sans vous déplacer.</p>
             </div>
           </div>
+          <div className="text-center mt-10">
+            <Link to="/biens" className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700">Visionner les biens</Link>
+          </div>
         </div>
       </section>
     </div>
